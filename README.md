@@ -34,14 +34,14 @@ Libraries:
 
 ## Secrets
 
-If you try to run prettylights.py directly, you'll notice that it will fail to
-import the `secrets` module. For access security, all operations exposed by the
-Philips Hue API require a "username" token, which is obtained by physically
-authenticating with the bridge first (i.e. requesting credentials from the
-bridge, and pressing a physical button on the bridge to confirm physical
+If you try to run prettylights immediately, you'll notice that it will fail
+because it cannot find the `secrets` module. For access security, all operations
+exposed by the Philips Hue API require a "username" token, which is obtained by
+physically authenticating with the bridge first (i.e. requesting credentials
+from the bridge, and pressing a button on the bridge to confirm physical
 access). See the [getting started guide][1] for more details about this process.
 
-In order to use this accesss token with prettylights, create a new file in the
+In order to use this access token with prettylights, create a new file in the
 repository called `secrets.py`, and define the following constants:
 
     HUE_TOKEN="your-api-developer-username"
