@@ -39,7 +39,7 @@ import the `secrets` module. For access security, all operations exposed by the
 Philips Hue API require a "username" token, which is obtained by physically
 authenticating with the bridge first (i.e. requesting credentials from the
 bridge, and pressing a physical button on the bridge to confirm physical
-access). See the [getting started guide](https://developers.meethue.com/documentation/getting-started for) for more details about this process.
+access). See the [getting started guide][1] for more details about this process.
 
 In order to use this accesss token with prettylights, create a new file in the
 repository called `secrets.py`, and define the following constants:
@@ -49,3 +49,5 @@ repository called `secrets.py`, and define the following constants:
 
 This file is explicitly excluded from the repository (via .gitignore), to
 prevent sensitive tokens from being pushed publicly.
+
+[1]: https://developers.meethue.com/documentation/getting-started
