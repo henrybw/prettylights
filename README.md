@@ -20,4 +20,4 @@ Libraries:
 ## Mac OS X
 
     $ brew install portaudio fftw
-    $ pip install pyaudio pyfftw
+    $ pip install phue pyaudio pyfftw
