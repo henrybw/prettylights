@@ -42,6 +42,7 @@ def stream_got_data(sctx, data, num_frame, time_info, status):
     return (None, pyaudio.paContinue)
 
 def init_lights(bridge, group):
+    scenes_by_name = {s.name: s for s in bridge.scenes}
     scene = scenes_by_name["Dope"]  # hehehe
     bridge.activate_scene(group.group_id, scene.scene_id)
 
