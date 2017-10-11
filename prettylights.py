@@ -15,6 +15,7 @@ CHANNELS = 2
 SAMPLE_RATE_HZ = 44100
 LIGHT_DIM = 5
 LIGHT_SPOT = 255
+PER_FRAME_SHIFT = 16  # complete rotation every 4 seconds
 
 class table(dict):
     def __init__(self, **kwargs):
@@ -23,6 +24,14 @@ class table(dict):
 
 class stream_context(table):
     prev_time = 0
+
+def light_frame(light, last_light):
+    if last_light:
+        last_light.brightness = LIGHT_DIM
+
+    light.brightness = LIGHT_SPOT
+    light.hue = light.hue + PER_FRAME_SHIFT
+    light.saturation = light.saturation + PER_FRAME_SHIFT
 
 def stream_got_data(sctx, data, num_frame, time_info, status):
     current_time = time_info['current_time']
@@ -42,9 +51,9 @@ def stream_got_data(sctx, data, num_frame, time_info, status):
     return (None, pyaudio.paContinue)
 
 def init_lights(bridge, group):
-    scenes_by_name = {s.name: s for s in bridge.scenes}
-    scene = scenes_by_name["Dope"]  # hehehe
-    bridge.activate_scene(group.group_id, scene.scene_id)
+    # scenes_by_name = {s.name: s for s in bridge.scenes}
+    # scene = scenes_by_name["Dope"]  # hehehe
+    # bridge.activate_scene(group.group_id, scene.scene_id)
 
     for light in group.lights:
         light.brightness = LIGHT_DIM
@@ -109,6 +118,7 @@ def main():
 
     try:
         if args.use_lights:
+            print group.lights
             last_light = None
             light_queue = deque(group.lights)
 
@@ -118,11 +128,8 @@ def main():
                 if not light_queue:
                     light_queue.extend(group.lights)
 
-                if last_light:
-                    last_light.brightness = LIGHT_DIM
+                light_frame(light, last_light)
                 last_light = light
-
-                light.brightness = LIGHT_SPOT
 
             time.sleep(0.25)
     except KeyboardInterrupt:
