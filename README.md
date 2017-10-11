@@ -1,6 +1,5 @@
 # prettylights
-Music visualizer that generates changing colors over time. Developed to
-implement a music visualizer on a group of Philips Hue programmable lightbulbs.
+Light show color mixer for a group of Philips Hue programmable lightbulbs.
 
 # Setup
 
